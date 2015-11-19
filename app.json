@@ -1,0 +1,29 @@
+{
+   "gameEngine" : {
+      "name" : "babylonjs" , "version" : "2.2"
+   },
+   "title" : "BabylonJS Landscape Template",
+   "appPreview" : false,
+   "relName" : "",
+   "description" : "Use this template to start with a blank 3D Game from BabylonJS",
+   "tooltip" : "A blank template for creating games from BabylonJS",
+   "section" : "templates",
+   "group" : "games",
+   "visible" : true,
+   "abbr" : "",
+   "relationship" : "babylonjs",
+   "mobile" : false,
+   "highlights" : [
+      "BabylonJS",
+      "Game"
+   ],
+   "projectTypeName" : "com.intel.xdk.projecttype.jsapp",
+   "articleUrl" : null,
+   "repoName" : "template-babylonjs-landscape",
+   "keywords" : [
+      "Blank Project",
+      "Game",
+      "BabylonJS"
+   ],
+   "appName" : ""
+}

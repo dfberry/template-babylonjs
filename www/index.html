@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+<head>
+    <title>BabylonJS Template</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+    <style>
+        @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }  @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }           @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+        html, body {
+            overflow: hidden;
+            width   : 100%;
+            height  : 100%;
+            margin  : 0;
+            padding : 0;
+        }
+
+        #renderCanvas {
+            width   : 100%;
+            height  : 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="lib/babylon.2.2.js"></script>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        window.addEventListener('DOMContentLoaded', function(){
+            // get the canvas DOM element
+            var canvas = document.getElementById('renderCanvas');
+
+            // load the 3D engine
+            var engine = new BABYLON.Engine(canvas, true);
+
+            // createScene function that creates and return the scene
+            var createScene = function(){
+                // create a basic BJS Scene object
+                var scene = new BABYLON.Scene(engine);
+
+                // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
+                var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5,-10), scene);
+
+                // target the camera to scene origin
+                camera.setTarget(BABYLON.Vector3.Zero());
+
+                // create a basic light, aiming 0,1,0 - meaning, to the sky
+                var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), scene);
+
+                // create a built-in "box" shape
+                var box = new BABYLON.Mesh.CreateBox('box1', 2.0, scene);
+                
+                // add image texture to the box
+                var texture = new BABYLON.StandardMaterial("texture1", scene);
+                texture.bumpTexture = new BABYLON.Texture("asset/babylonjs.png", scene);
+                box.material = texture;
+                
+                // rotate the box
+                var animationX = new BABYLON.Animation.CreateAndStartAnimation('boxrotate', box, 'rotation.x', 60, 360, 1, 10);
+                var animationY = new BABYLON.Animation.CreateAndStartAnimation('boxrotate', box, 'rotation.y', 60, 360, 1, 10);
+                
+                // return the created scene
+                return scene;
+            }
+
+            // call the createScene function
+            var scene = createScene();
+
+            // run the render loop
+            engine.runRenderLoop(function(){
+                scene.render();
+            });
+
+            // the canvas/window resize event handler
+            window.addEventListener('resize', function(){
+                engine.resize();
+            });
+        });
+    </script>
+    
+</body>
+</html>
